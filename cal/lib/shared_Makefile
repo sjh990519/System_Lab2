@@ -1,0 +1,14 @@
+.PHONY : libtest_share_calc.so.1.0.1
+libtest_share_calc.so.1.0.1 : add.o subtract.o multiply.o divide.o
+	gcc --shared -Wl,-soname,libtest_share_calc.so -o libtest_share_calc.so.1.0.1 add.o subtract.o multiply.o divide.o
+	ln -s libtest_share_calc.so.1.0.1 libtest_share_calc.so
+add.o : add.c
+	gcc -c add.c
+subtract.o : subtract.c
+	gcc -c subtract.c
+multiply.o : multiply.c
+	gcc -c multiply.c
+divide.o : divide.c
+	gcc -c divide.c
+clean : 
+	rm -f libtest_share_calc.so.1.0.1 add.o subtract.o multiply.o divide.o

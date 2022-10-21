@@ -1,0 +1,6 @@
+static_calc_make : calc.o
+	gcc -o static_calc_make calc.o -I./lib -L./lib -ltest_static_calc
+calc.o : calc.c
+	gcc -c calc.c -I./lib -L./lib -ltest_static_calc
+clean : 
+	rm -f static_calc_make calc.o

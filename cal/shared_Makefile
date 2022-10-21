@@ -1,0 +1,6 @@
+shared_calc_make : calc.o
+	gcc -o shared_calc_make calc.o -I./lib -L./lib -Wl,--rpath=./lib -ltest_share_calc
+calc.o : calc.c
+	gcc -c calc.c -I./lib -L./lib -Wi,--rpath=./lib -ltest_share_calc
+clean :
+	rm -f shared_calc_make calc.o
