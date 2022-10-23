@@ -3,35 +3,29 @@
 #include <dlfcn.h>
 
 
-int main()
-{
+int main(){
+
 
 	void *handle;
-
-	// add()
+	
+	
 	float (*add)(float, float);
-
-	// subtract
 	float (*subtract)(float, float);
-
-	// multiply
 	float (*multiply)(float, float);
-
-	// divide
 	float (*divide)(float, float);
-
-	float a, b;
 	
+	
+	float a;
+	float b;
 	char *error;
-	
-	
 	
 	handle = dlopen("./lib/libtest_dynamic_calc.so.2", RTLD_LAZY);
 	
-	if (!handle)
+	if(!handle)
 	{
 		fputs(dlerror(), stderr);
 	}
+	
 	
 	// add
 	add = dlsym(handle, "add");
@@ -40,7 +34,8 @@ int main()
 		fprintf(stderr, "%s", error);
 		exit(1);
 	}
-	
+
+
 	// subtract
 	subtract = dlsym(handle, "subtract");
 	if((error = dlerror()) != NULL)
@@ -48,6 +43,7 @@ int main()
 		fprintf(stderr, "%s", error);
 		exit(1);
 	}
+	
 	
 	// multiply
 	multiply = dlsym(handle, "multiply");
@@ -57,6 +53,7 @@ int main()
 		exit(1);
 	}
 	
+	
 	// divide
 	divide = dlsym(handle, "divide");
 	if((error = dlerror()) != NULL)
@@ -65,9 +62,7 @@ int main()
 		exit(1);
 	}
 	
-	
-	printf("\n동적 계산기\n");
-	
+	printf("동적 계산기\n");
 	printf("첫 번째 : ");
 	scanf("%f", &a);
 
@@ -90,5 +85,4 @@ int main()
 	dlclose(handle);
 
 	return 0;
-
 }
